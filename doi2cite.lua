@@ -18,8 +18,8 @@ error_strs = {};
 error_strs["Resource not found."] = 404
 error_strs["No acceptable resource available."] = 406
 error_strs["<html><body><h1>503 Service Unavailable</h1>\n"
-        .."No server is available to handle this request.\n"
-        .."</body></html>"] = 503
+    .."No server is available to handle this request.\n"
+    .."</body></html>"] = 503
 
 
 --------------------------------------------------------------------------------
@@ -61,6 +61,7 @@ function Cite(c)
         else
             doi = nil
         end
+
         if doi then
             if doi_key_map[doi] then
                 citation.id = doi_key_map[doi]
@@ -85,7 +86,7 @@ function Cite(c)
                     else
                         error("Unable to open file: "..bibpath)
                     end
-                end                
+                end
             end
         end
     end
@@ -102,8 +103,8 @@ function get_bibentry(doi)
     if entry_str == nil then
         print("Request DOI: " .. doi)
         local url = base_url.."/works/"
-            ..doi.."/transform/application/x-bibtex"
-            .."?mailto="..mailto
+        ..doi.."/transform/application/x-bibtex"
+        .."?mailto="..mailto
         mt, entry_str = pandoc.mediabag.fetch(url)
     end
     return entry_str
@@ -125,10 +126,10 @@ function get_paths_from(metadata)
             end
         end
     end
-    return filepaths    
+    return filepaths
 end
 
--- Extract filename and dirname from a given a path 
+-- Extract filename and dirname from a given a path
 function split_path(filepath)
     local delim = nil
     local len = filepath:len()
@@ -146,7 +147,7 @@ function split_path(filepath)
     return {filename = filename, dirname = dirname}
 end
 
--- Find bibname in a given filepath list and return the filepath if found 
+-- Find bibname in a given filepath list and return the filepath if found
 function find_filepath(filename, filepaths)
     for path, _ in pairs(filepaths) do
         local filename = split_path(path)["filename"]
@@ -185,15 +186,15 @@ end
 -- Replace entry key of "entry_string" to newkey
 function replace_entrykey(entry_string, newkey)
     entry_string = entry_string:gsub('(@%w+{).-(,)', '%1'..newkey..'%2')
-    return entry_string    
-end 
+    return entry_string
+end
 
 -- Make hashmap which key = DOI, value = bibtex entry string
 function get_doi_entry_map(bibtex_string)
     local entries = {};
     for entry_str in bibtex_string:gmatch('@.-\n}\n') do
-      local doi = get_entrydoi(entry_str)
-      entries[doi] = entry_str
+        local doi = get_entrydoi(entry_str)
+        entries[doi] = entry_str
     end
     return entries
 end
@@ -202,9 +203,9 @@ end
 function get_doi_key_map(bibtex_string)
     local keys = {};
     for entry_str in bibtex_string:gmatch('@.-\n}\n') do
-      local doi = get_entrydoi(entry_str)
-      local key = get_entrykey(entry_str)
-      keys[doi] = key
+        local doi = get_entrydoi(entry_str)
+        local key = get_entrykey(entry_str)
+        keys[doi] = key
     end
     return keys
 end
@@ -233,9 +234,9 @@ end
 function verify_path(bibpath)
     if bibpath == nil then
         print("[WARNING] doi2cite: "
-            .."The given file path is incorrect or empty. "
-            .."In Windows-formatted filepath, Pandoc recognizes "
-            .."double backslash ("..[[\\]]..") as the delimiters."
+          .."The given file path is incorrect or empty. "
+          .."In Windows-formatted filepath, Pandoc recognizes "
+          .."double backslash ("..[[\\]]..") as the delimiters."
         )
         return "__from_DOI.bib"
     else
