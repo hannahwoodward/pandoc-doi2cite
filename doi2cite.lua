@@ -118,11 +118,13 @@ function get_paths_from(metadata)
             filepaths[metadata[1].text] = true
         elseif type(metadata) == "table" then
             for _, datum in pairs(metadata) do
-                if datum[1] then
-                    if datum[1].text then
-                        filepaths[datum[1].text] = true
-                    end
+                if type(datum) == 'string' then
+                    filepaths[datum] = true
                 end
+                -- TODO: test when this holds -> from markdown?
+                -- elseif datum[1] and datum[1].text then
+                --   filepaths[datum[1].text] = true
+                -- end
             end
         end
     end
