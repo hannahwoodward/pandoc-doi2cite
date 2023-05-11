@@ -1,7 +1,7 @@
-# Where to get this filter
-This filter is included in the official Pandoc Lua filter repository (https://github.com/pandoc/lua-filters).
+# Where to get this filterThis filter is included in the official Pandoc Lua filter repository (https://github.com/pandoc/lua-filters).
 
 # pandoc-doi2cite
+
 This pandoc lua filiter helps users to insert references in a document
 with using DOI(Digital Object Identifier) tags. With this filter, users
 do not need to make bibtex file by themselves. Instead, the filter
@@ -13,8 +13,7 @@ tags into citation keys available by --citeproc.
 What the filter do are as follows:
 1.  Search citations with DOI tags in the document
 2.  Search corresponding bibtex data from `__from_DOI.bib` file
-3.  If not found, get bibtex data of the DOI from
-    http://api.crossref.org
+3.  If not found, get bibtex data of the DOI from http://api.crossref.org
 4.  Add reference data to `__from_DOI.bib` file
 5.  Check duplications of reference keys
 6.  Replace DOI tags to the correspoinding citation keys
@@ -37,7 +36,7 @@ same as the accessible URL.
 
 # YAML header
 The file **name** of the auto-generated bibliography file **MUST** be
-`__from_DOI.bib`, but the **place** of the file can be changed (e.g. 
+`__from_DOI.bib`, but the **place** of the file can be changed (e.g.
 `'./refs/__from_DOI.bib'` or `'refs\\__from_DOI.bib'` for Windows). Yo
 u can designate the filepath in the document yaml header. The yaml key
  is `bibliography`, which is also used by --citeproc.
@@ -47,15 +46,15 @@ u can designate the filepath in the document yaml header. The yaml key
 
 example1.md:
 
-    ---
+---
     bibliography:
       - 'my_refs.bib'
       - '__from_DOI.bib'
     ---
 
     # Introduction
-    The Laemmli system is one of the most widely used gel systems for the separation of proteins.[@LAEMMLI_1970]
-    By the way, Einstein is genius.[@https://doi.org/10.1002/andp.19053220607; @doi.org/10.1002/andp.19053220806; @doi:10.1002/andp.19053221004]
+        The Laemmli system is one of the most widely used gel systems for the separation of proteins.[@LAEMMLI_1970]
+        By the way, Einstein is genius.[@https://doi.org/10.1002/andp.19053220607; @doi.org/10.1002/andp.19053220806; @doi:10.1002/andp.19053221004]
 
 Example command 1 (.md -\> .md)
 
